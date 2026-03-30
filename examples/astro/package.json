@@ -1,0 +1,32 @@
+{
+  "name": "tina-astro-cloudflare",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"astro dev\"",
+    "build": "tinacms build --skip-indexing && astro build",
+    "deploy": "tinacms build --skip-indexing && astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "@alexbruf/d1-level": "0.2.0",
+    "@astrojs/cloudflare": "^12.0.0",
+    "@clerk/backend": "^3.2.3",
+    "@clerk/clerk-js": "^4.73.0",
+    "@tinacms/datalayer": "^2.0.13",
+    "astro": "^5.0.0",
+    "tinacms": "^2.6.0",
+    "tinacms-clerk": "^21.0.0",
+    "tinacms-gitprovider-github": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "@tinacms/cli": "^2.2.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.0.0"
+  },
+  "patchedDependencies": {
+    "@tinacms/mdx@1.8.3": "patches/@tinacms%2Fmdx@1.8.3.patch",
+    "@tinacms/mdx@2.1.0": "patches/@tinacms%2Fmdx@2.1.0.patch",
+    "@tinacms/graphql@2.2.1": "patches/@tinacms%2Fgraphql@2.2.1.patch"
+  }
+}

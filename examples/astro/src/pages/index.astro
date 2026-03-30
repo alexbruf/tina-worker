@@ -1,0 +1,22 @@
+---
+let post = null
+try {
+  const client = (await import('../../tina/__generated__/client')).default
+  const res = await client.queries.post({ relativePath: 'hello-world.md' })
+  post = res.data.post
+} catch {}
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{post?.title ?? 'TinaCMS + Astro'}</title>
+  </head>
+  <body>
+    <main style="max-width:640px;margin:2rem auto;font-family:system-ui,sans-serif">
+      <h1>{post?.title ?? 'TinaCMS + Astro on Cloudflare'}</h1>
+      {post?.date && <time>{new Date(post.date).toLocaleDateString()}</time>}
+      <p>Edit this content at <a href="/admin/index.html">/admin</a></p>
+    </main>
+  </body>
+</html>

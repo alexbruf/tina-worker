@@ -1,0 +1,17 @@
+diff --git a/dist/index.js b/dist/index.js
+index bc371738964e871a58953bd416dde639c35bbddc..efd4e19ffdf2a0914bbc3cc346ba191b2e95ebfd 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -3339,8 +3339,12 @@ var SUBLEVEL_OPTIONS = {
+   separator: INDEX_KEY_FIELD_SEPARATOR,
+   valueEncoding: "json"
+ };
++var LEVEL_NON_FUNCTION_PROPS = /* @__PURE__ */ new Set(["parent", "prefix", "status", "type"]);
+ var LevelProxyHandler = {
+   get: function(target, property) {
++    if (LEVEL_NON_FUNCTION_PROPS.has(property)) {
++      return target[property];
++    }
+     if (!target[property]) {
+       throw new Error(`The property, ${property.toString()}, doesn't exist`);
+     }

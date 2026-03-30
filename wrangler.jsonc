@@ -1,0 +1,43 @@
+{
+  "name": "tina-worker",
+  "main": "src/index.ts",
+
+  // Serve public/ as static assets — includes the TinaCMS admin UI at /admin/index.html
+  "assets": {
+    "directory": "./public"
+  },
+  "account_id": "0cba3747b5fcf1aa4eec00e1d7ade7a8",
+  "compatibility_date": "2025-09-15",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // D1 database for TinaCMS content index
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tina-standalone-db",
+      "database_id": "98396986-5614-4704-be20-d6e57aef40ba"
+    }
+  ],
+
+  // Non-secret config vars (secrets set via: wrangler secret put <NAME>)
+  "vars": {
+    "GITHUB_OWNER": "alexbruf",
+    "GITHUB_REPO": "tina-content-demo",
+    "GITHUB_BRANCH": "main",
+    "TINA_PUBLIC_IS_LOCAL": "false",
+    // Replace with your Clerk publishable key (safe to expose)
+    "TINA_PUBLIC_CLERK_PUBLIC_KEY": "pk_test_Zm9uZC1hbGJhY29yZS0yNS5jbGVyay5hY2NvdW50cy5kZXYk"
+  },
+
+  // Shim js-sha1 with a node:crypto implementation — avoids the eval("require('crypto')")
+  // pattern in js-sha1's UMD wrapper that breaks in the Workers runtime.
+  "alias": {
+    "js-sha1": "./src/shims/js-sha1.ts"
+  },
+
+  // Cron: reindex content from Git every 6 hours
+  // Catches direct pushes that bypass the CMS UI
+  "triggers": {
+    "crons": ["0 */6 * * *"]
+  }
+}

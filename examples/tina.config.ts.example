@@ -1,0 +1,46 @@
+// tina/config.ts — for React Router v7, Astro, and Next.js (OpenNext) examples
+//
+// Copy to your project's tina/config.ts and replace the schema with your content types.
+// Key difference from standalone worker: contentApiUrlOverride uses /api/tina/gql
+// because TinaCMS is embedded as a framework route (not a top-level worker).
+
+import { defineConfig } from 'tinacms'
+import { ClerkAuthProvider } from 'tinacms-clerk/dist/tinacms'
+import Clerk from '@clerk/clerk-js'
+
+const clerk = new Clerk(process.env.TINA_PUBLIC_CLERK_PUBLIC_KEY || '')
+
+export default defineConfig({
+  branch: process.env.GITHUB_BRANCH || 'main',
+
+  authProvider: new ClerkAuthProvider({ clerk }),
+
+  // Points the TinaCMS admin UI at your framework's API route
+  contentApiUrlOverride: '/api/tina/gql',
+
+  build: {
+    outputFolder: 'admin',
+    publicFolder: 'public',
+  },
+  media: {
+    tina: {
+      mediaRoot: 'uploads',
+      publicFolder: 'public',
+    },
+  },
+
+  schema: {
+    collections: [
+      {
+        name: 'post',
+        label: 'Posts',
+        path: 'content/posts',
+        fields: [
+          { type: 'string', name: 'title', label: 'Title', isTitle: true, required: true },
+          { type: 'datetime', name: 'date', label: 'Published Date' },
+          { type: 'rich-text', name: 'body', label: 'Body', isBody: true },
+        ],
+      },
+    ],
+  },
+})

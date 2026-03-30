@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+.wrangler/
+tina/__generated__/
+.react-router/

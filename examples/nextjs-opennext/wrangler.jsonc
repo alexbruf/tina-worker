@@ -1,0 +1,27 @@
+{
+  "name": "tina-nextjs-example",
+  "main": ".open-next/worker.js",
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "compatibility_date": "2025-09-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "alias": {
+    "js-sha1": "./src/shims/js-sha1.ts"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tina-db",
+      "database_id": "YOUR_D1_DATABASE_ID"
+    }
+  ],
+  "vars": {
+    "GITHUB_OWNER": "your-github-username",
+    "GITHUB_REPO": "your-content-repo",
+    "GITHUB_BRANCH": "main",
+    "TINA_PUBLIC_IS_LOCAL": "false",
+    "TINA_PUBLIC_CLERK_PUBLIC_KEY": "pk_test_XXXXXXXXXXXXXXXX"
+  }
+}

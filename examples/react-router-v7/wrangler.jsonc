@@ -1,0 +1,20 @@
+{
+  "name": "tina-react-router-example",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2025-09-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tina-db",
+      "database_id": "YOUR_D1_DATABASE_ID"
+    }
+  ],
+  "vars": {
+    "GITHUB_OWNER": "your-github-username",
+    "GITHUB_REPO": "your-content-repo",
+    "GITHUB_BRANCH": "main",
+    "TINA_PUBLIC_IS_LOCAL": "false",
+    "TINA_PUBLIC_CLERK_PUBLIC_KEY": "pk_test_XXXXXXXXXXXXXXXX"
+  }
+}

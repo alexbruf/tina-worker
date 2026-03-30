@@ -1,0 +1,37 @@
+{
+  "name": "tina-nextjs-cloudflare",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
+    "build": "tinacms build --skip-indexing && next build",
+    "deploy": "tinacms build --skip-indexing && next build && bunx @opennextjs/cloudflare build && wrangler deploy"
+  },
+  "dependencies": {
+    "@alexbruf/d1-level": "0.2.0",
+    "@clerk/backend": "^3.2.3",
+    "@clerk/clerk-js": "^4.73.0",
+    "@opennextjs/cloudflare": "^1.0.0",
+    "@tinacms/datalayer": "^2.0.13",
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tinacms": "^2.6.0",
+    "tinacms-clerk": "^21.0.0",
+    "tinacms-gitprovider-github": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "@tinacms/cli": "^2.2.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.0.0"
+  },
+  "patchedDependencies": {
+    "@tinacms/mdx@1.8.3": "patches/@tinacms%2Fmdx@1.8.3.patch",
+    "@tinacms/mdx@2.1.0": "patches/@tinacms%2Fmdx@2.1.0.patch",
+    "@tinacms/graphql@2.2.1": "patches/@tinacms%2Fgraphql@2.2.1.patch"
+  }
+}
